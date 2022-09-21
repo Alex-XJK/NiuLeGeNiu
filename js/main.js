@@ -2,7 +2,8 @@
 const types = ["paul", "61", "jiang", "shili", "yz" ,"jiao", "paopao", "dan", "jagger", "hong"];
 const count = 204;
 const dist = {"paul":24, "61":18, "jiang": 21, "shili": 21, "yz": 21, "jiao": 21, "paopao":21, "dan":18, "jagger":21, "hong":18};
-var inc = 80;
+var inc = 90;
+var pinc = 90;
 const pile = [
     [
         [0,0,0,0,0,0,0],
@@ -110,7 +111,7 @@ const pile = [
 
 $(document).ready(function(){
     //initialize
-
+    
     tilelist = initializeTiles(dist);
     bootstrapLayout(pile,tilelist);
     setGameSize();
@@ -123,7 +124,10 @@ $(document).ready(function(){
     $("#shuffle").click(function(){
         shuffleTypes();
     });
-    
+
+    $(window).resize(function(){
+        setGameSize();
+    });
 });
 
 
@@ -315,11 +319,30 @@ function shuffle(array) {
   }
   
 function setGameSize() {
-    console.log(inc);
+
+    var w = $(window).width();
+
+    if (w < 720){
+        inc = Math.floor(w/8);
+    }
+    else{
+        inc = 90;
+    }
     $('#vcontainer').css("width",inc*8+"px");
     $('.card').css("height",(inc-7)+'px').css("width",(inc-7)+'px').css("border-radius",Math.floor(inc/10)+'px');
+
+    $('.unselectedcard').each(function(){
+        l = $(this).css("left").match(/\d+/)[0];
+        t = $(this).css("top").match(/\d+/)[0];
+        console.log(t);
+        $(this).css("left",Math.floor((l/pinc) * inc)+'px');
+        $(this).css("top",Math.floor((t/pinc) * inc)+'px');
+    });
+    
     $('.pg').css("height",(inc*7)+'px').css("width",(inc*7)+'px');
     $('#stack').css("height",((inc+10)+'px')).css("width",((inc*7)+20)+'px');
     //$('#tools').css("width",inc*6+"px");
     $('#tools').children().css("height",inc*0.8+'px').css("width",inc*0.8+'px');
+
+    pinc = inc;
 }
