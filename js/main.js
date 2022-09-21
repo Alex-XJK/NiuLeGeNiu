@@ -329,8 +329,8 @@ function setGameSize() {
         inc = 90;
     }
     $('#vcontainer').css("width",inc*8+"px");
-    $('.card').css("height",(inc-7)+'px').css("width",(inc-7)+'px').css("border-radius",Math.floor(inc/10)+'px');
-
+    $('.card').css("height",(inc-7)+'px').css("width",(inc-7)+'px').css("border-radius",Math.floor(inc/10)+'px').css("-webkit-border-radius",Math.floor(inc/10)+'px').css("-moz-border-radius",Math.floor(inc/10)+'px');
+    $('.shade').css("border-radius",Math.floor(inc/10)+'px').css("-webkit-border-radius",Math.floor(inc/10)+'px').css("-moz-border-radius",Math.floor(inc/10)+'px');
     $('.unselectedcard').each(function(){
         l = $(this).css("left").match(/\d+/)[0];
         t = $(this).css("top").match(/\d+/)[0];
