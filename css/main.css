@@ -20,12 +20,11 @@ p2{
     position:relative;
 }
 #stack {
-
     background-color:white;
     box-shadow:  -6px -6px #00f2ea, inset -6px -6px #ff0050;
     height:110px;
     width:720px;
-    margin: 100px 50px;
+    margin: 40px auto;
     position:relative;
 }
 #over, #win{
@@ -40,7 +39,7 @@ p2{
 #over .button, #win .button {
     height:50px;
     width:150px;
-    font-size:25px;
+    font-size:20px;
     text-align:center;
     font-family:"HanziPen SC";
     font-style:none;
@@ -66,9 +65,8 @@ p2{
     width:80px;
 }
 #tools{
-    position:absolute;
-    right: -100px;
-    top:100px;
+    margin:auto;
+    width: fit-content;
 }
 #tools div{
     background-color: #eee;
@@ -92,14 +90,12 @@ p2{
     border: 1px solid #000;
     height:700px;
     width:700px;
-    margin: 50px 50px;
+    margin: 30px auto;
     position:relative;
 }
 .card {
     margin:4px;
     outline: 3px solid #aaa;
-    height:93px;
-    width:93px;
     border-radius: 10px;
     box-shadow: 6px 9px rgb(0 0 0 / 0.4);
 }

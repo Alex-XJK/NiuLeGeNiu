@@ -2,6 +2,7 @@
 const types = ["paul", "61", "jiang", "shili", "yz" ,"jiao", "paopao", "dan", "jagger", "hong"];
 const count = 204;
 const dist = {"paul":24, "61":18, "jiang": 21, "shili": 21, "yz": 21, "jiao": 21, "paopao":21, "dan":18, "jagger":21, "hong":18};
+var inc = 80;
 const pile = [
     [
         [0,0,0,0,0,0,0],
@@ -109,8 +110,10 @@ const pile = [
 
 $(document).ready(function(){
     //initialize
+
     tilelist = initializeTiles(dist);
     bootstrapLayout(pile,tilelist);
+    setGameSize();
     refreshClickability();
 
     $(".restart").click(function(){
@@ -184,7 +187,7 @@ function refreshClickability(){
                 x2 = $(e2).css('left').match(/\d+/)[0];
                 y2 = $(e2).css('top').match(/\d+/)[0];
 
-                if (Math.abs(x1-x2)<100 && Math.abs(y1-y2)<100){
+                if (Math.abs(x1-x2)<inc && Math.abs(y1-y2)<inc){
                    $(e2).removeClass("clickable");
                    $(e2).find(".shade").show();
                 }
@@ -195,7 +198,7 @@ function refreshClickability(){
     $(".clickable").off('click').click(function(){
         $(this).appendTo("#stack");
         $(this).removeClass("unselectedcard clickable");
-        $(this).removeAttr("style");
+        $(this).css("top", "").css("left","");
         $(this).addClass("selectedcard");
 
         check($(this).attr("type"));
@@ -225,7 +228,7 @@ function bootstrapLayout(pile, tilelist){
             var offsetY = 0;
         }
         else{
-            var offsetY = 50;
+            var offsetY = inc/2;
         }
 
         for (j=0;j<pile[i].length;j++)
@@ -235,15 +238,15 @@ function bootstrapLayout(pile, tilelist){
                 var offsetX = 0;
             }
             else{
-                var offsetX = 50;
+                var offsetX = inc/2;
             }
 
             for (k=0;k<pile[i][j].length;k++)
             {
                 if (pile[i][j][k] == 1){
                     c++;
-                    x = offsetX + k * 100;
-                    y = offsetY + j * 100;
+                    x = offsetX + k * inc;
+                    y = offsetY + j * inc;
                     e.append($('<div div class="card unselectedcard" style="top:'+y+'px;left:'+x+'px;"></div>'))
                 }
                 
@@ -311,3 +314,12 @@ function shuffle(array) {
     return array;
   }
   
+function setGameSize() {
+    console.log(inc);
+    $('#vcontainer').css("width",inc*8+"px");
+    $('.card').css("height",(inc-7)+'px').css("width",(inc-7)+'px').css("border-radius",Math.floor(inc/10)+'px');
+    $('.pg').css("height",(inc*7)+'px').css("width",(inc*7)+'px');
+    $('#stack').css("height",((inc+10)+'px')).css("width",((inc*7)+20)+'px');
+    //$('#tools').css("width",inc*6+"px");
+    $('#tools').children().css("height",inc*0.8+'px').css("width",inc*0.8+'px');
+}
