@@ -108,10 +108,16 @@ const pile = [
         [1,0,0,0,0,0,1]
     ]
 ];
+var bo = $("audio")[0];
+var bo1 = $("audio")[1];
+var fail = $("audio")[2];
+var click1 = $("audio")[3];
+var clear = $("audio")[4];
+var paul = $("audio")[5];
 
 $(document).ready(function(){
     //initialize
-    
+
     tilelist = initializeTiles(dist);
     bootstrapLayout(pile,tilelist);
     setGameSize();
@@ -147,6 +153,7 @@ function check(type){
                 $(this).remove();
             }
         });
+        playclearSound(type);
     }
     
     //check game over
@@ -169,6 +176,7 @@ function check(type){
 }
 
 function refreshClickability(){
+
     $(".unselectedcard").each(function(){
         if (!$(this).hasClass("clickable")) {
             $(this).addClass("clickable");
@@ -200,6 +208,7 @@ function refreshClickability(){
     });
 
     $(".clickable").off('click').click(function(){
+        bo.play();
         $(this).appendTo("#stack");
         $(this).removeClass("unselectedcard clickable");
         $(this).css("top", "").css("left","");
@@ -209,6 +218,7 @@ function refreshClickability(){
         //refresh clickability
         refreshClickability();
     });
+
 }
 
 function reset(){
@@ -345,4 +355,14 @@ function setGameSize() {
     $('#tools').children().css("height",inc*0.8+'px').css("width",inc*0.8+'px');
 
     pinc = inc;
+}
+
+function playclearSound(t){
+    var a = new Audio('audio/'+t+'.mp3');
+    if (a != undefined ) {
+        a.play();
+    }
+    else{
+        clear.play();
+    }
 }
