@@ -163,6 +163,7 @@ function check(type){
             clickClose: false,
             showClose: false
         });
+        fail.play()
     }
 
     // check win
