@@ -113,7 +113,7 @@ var bo1 = $("audio")[1];
 var fail = $("audio")[2];
 var click1 = $("audio")[3];
 var clear = $("audio")[4];
-var paul = $("audio")[5];
+var win = $("audio")[5];
 
 $(document).ready(function(){
     //initialize
@@ -163,7 +163,7 @@ function check(type){
             clickClose: false,
             showClose: false
         });
-        fail.play()
+        fail.play();
     }
 
     // check win
@@ -173,6 +173,7 @@ function check(type){
             clickClose: false,
             showClose: false
         });
+        win.play();
     }
 }
 
@@ -288,6 +289,10 @@ function bootstrapLayout(pile, tilelist){
 }
 
 function shuffleTypes(){
+    
+    var a = new Audio('audio/refresh.mp3');
+    a.play();
+
     var tempTiles = [];
 
     $(".unselectedcard").each(function(){
