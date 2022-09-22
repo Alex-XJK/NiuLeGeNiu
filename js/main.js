@@ -208,7 +208,8 @@ function refreshClickability(){
     });
 
     $(".clickable").off('click').click(function(){
-        bo.play();
+        var a = new Audio('audio/bo.mp3');
+        a.play();
         $(this).appendTo("#stack");
         $(this).removeClass("unselectedcard clickable");
         $(this).css("top", "").css("left","");
